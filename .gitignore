@@ -47,3 +47,8 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Source-site clone research (working material, not part of the delivered site)
+docs/research/*/
+public/sites/
+scripts/download-assets-*.mjs
