@@ -1,9 +1,29 @@
+import { SiteHeader } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/SiteHeader";
+import { HeroSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/HeroSection";
+import { WorkTransformSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/WorkTransformSection";
+import { WorkTransformImagesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/WorkTransformImagesSection";
+import { MedicinaRealSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/MedicinaRealSection";
+import { BioSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/BioSection";
+import { MetodoSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/MetodoSection";
+import { EspecialidadesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/EspecialidadesSection";
+import { CentrosSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/CentrosSection";
+import { SiteFooter } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/SiteFooter";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <p className="text-muted-foreground">
-        Clone target not yet built. Run <code className="font-mono text-foreground">/clone-website</code> to start.
-      </p>
-    </main>
+    <>
+      <SiteHeader />
+      <main className="flex-1">
+        <HeroSection />
+        <WorkTransformSection />
+        <WorkTransformImagesSection />
+        <EspecialidadesSection />
+        <MedicinaRealSection />
+        <BioSection />
+        <MetodoSection />
+        <CentrosSection />
+      </main>
+      <SiteFooter />
+    </>
   );
 }
