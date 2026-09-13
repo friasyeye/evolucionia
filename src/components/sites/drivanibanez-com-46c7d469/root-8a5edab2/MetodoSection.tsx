@@ -1,11 +1,31 @@
-import { asset } from "../shared/assets";
 import { Reveal } from "../shared/Reveal";
 import { CountUp } from "../shared/CountUp";
 
 const STATS = [
-  { n: 261, label: "Análisis cada año" },
-  { n: 60, label: "Minutos por prueba" },
-  { n: 23, label: "Años de experiencia" },
+  { n: 24, suffix: "/7", label: "Activo, sin pausas" },
+  { n: 95, suffix: "%", label: "Tareas resueltas sin intervención humana" },
+  { n: 0, suffix: "", label: "decisiones importantes que toma sin ti " },
+];
+
+const TRUST_BLOCKS = [
+  {
+    n: "01",
+    title: "Servidores en la Unión Europea",
+    body: "Tus datos se alojan en servidores propios, dentro de la Unión Europea y bajo el marco del RGPD. No dependemos de infraestructura de terceros fuera de Europa para guardar lo que es tuyo, ni subcontratamos ese almacenamiento a nadie más.",
+    img: "/images/servidoresjpg.jpg",
+  },
+  {
+    n: "02",
+    title: "Tú decides qué sale de tu negocio",
+    body: "Cuando un proceso necesita apoyarse en un modelo externo como ChatGPT o Claude, decidimos contigo qué datos se envían y cuáles se quedan fuera antes de que el sistema empiece a funcionar. No es una decisión automática que toma el sistema por su cuenta.",
+    img: "/images/datos.jpg",
+  },
+  {
+    n: "03",
+    title: "No te dejamos solos tras la entrega",
+    body: "Un sistema de IA no se monta y se olvida. Revisamos periódicamente que siga funcionando bien, que siga conectado solo a lo que debe, y cerramos cualquier acceso o permiso que ya no haga falta antes de que se convierta en un problema.",
+    img: "/images/mantenimiento.jpg",
+  },
 ];
 
 export function MetodoSection() {
@@ -17,52 +37,30 @@ export function MetodoSection() {
           as="h2"
           className="font-tight max-w-[13ch] text-[clamp(2.8rem,7vw,6.1rem)] font-semibold leading-[0.95] text-[#07357e]"
         >
-          Qué es el Método Metabólico®
+          Por qué esto no lo resuelve ChatGPT
         </Reveal>
 
         {/* intro two-column */}
         <div className="mt-14 grid gap-10 md:grid-cols-2">
-          <Reveal className="flex items-end">
+          <Reveal className="order-2 flex items-end md:order-1">
             <p className="flex items-center gap-4 text-[16px] text-[#07357e]">
               <span className="h-px w-10 bg-[#56c5f2]" />
-              Preciso. Científico. Efectivo.
+              Conectado. Independiente. Permanente.
             </p>
           </Reveal>
 
-          <Reveal className="space-y-5 border-l border-[#07357e]/15 pl-6 text-[16px] leading-relaxed text-[#07357e] md:pl-10">
+          <Reveal className="order-1 space-y-5 border-l border-[#07357e]/15 pl-6 text-[16px] leading-relaxed text-[#07357e] md:order-2 md:pl-10">
+            <p>
+              ChatGPT, Claude o cualquier otro modelo son herramientas potentes.
+            </p>
+            <p>
+              Pero siguen siendo eso: herramientas que alguien tiene que abrir, usar y revisar.
+            </p>
             <p className="font-semibold">
-              Cada cuerpo responde de forma distinta a la alimentación, al ejercicio y al estrés.
+              Nosotros montamos sistemas a medida, integrados en tus procesos, que conectan tus
+              herramientas y funcionan sin que nadie tenga que operarlos.
             </p>
-            <p>
-              Imagina que, en lugar de probar otra dieta o entrenar más duro,{" "}
-              <strong className="font-semibold">
-                primero analizamos cómo tu cuerpo utiliza la energía
-              </strong>
-              .
-            </p>
-            <p>
-              Descubrimos cuánto gastas en reposo, qué combustible usas mejor y a qué intensidad
-              quemas más grasa.
-            </p>
-            <p>
-              Con esos datos{" "}
-              <strong className="font-semibold">
-                diseñamos una estrategia de nutrición y ejercicio 100% personalizada
-              </strong>{" "}
-              y exclusiva para ti.
-            </p>
-            <p>
-              Eso es{" "}
-              <strong className="font-semibold">
-                el Método Metabólico del Dr. Ibáñez: un sistema médico registrado que mide tu
-                metabolismo antes de pautar nada.
-              </strong>
-            </p>
-            <p>Así, las decisiones dejan de ser genéricas y pasan a ser precisas, coherentes y optimizadas para ti.</p>
-            <p>
-              Porque <strong className="font-semibold">el problema no es tu esfuerzo</strong>, es no
-              saber cómo funciona tu cuerpo.
-            </p>
+            <p>Dos categorías distintas. Cada una con su función.</p>
           </Reveal>
         </div>
 
@@ -71,7 +69,7 @@ export function MetodoSection() {
           {STATS.map((s) => (
             <Reveal key={s.label}>
               <div className="font-tight text-[clamp(2.5rem,7vw,6.1rem)] font-semibold leading-none text-[#07357e]">
-                <CountUp end={s.n} />
+                <CountUp end={s.n} suffix={s.suffix} />
               </div>
               <div className="mt-3 text-[15px] font-semibold text-[#07357e] md:text-[16px]">
                 {s.label}
@@ -85,66 +83,38 @@ export function MetodoSection() {
           as="p"
           className="font-tight mx-auto mt-24 max-w-[22ch] text-center text-[clamp(1.9rem,4.4vw,3.6rem)] font-semibold leading-[1.05] text-[#07357e]"
         >
-          Durante años, muchas personas han pasado por consulta después de probar dietas, métodos o
-          promesas que no entendían su cuerpo.
+          Muchas empresas dudan antes de dar acceso a sus datos a un sistema de IA que no conocen ni controlan del todo, y con razón.
         </Reveal>
 
-        {/* diff + watch image */}
-        <div className="mt-20 grid items-center gap-10 md:grid-cols-2">
-          <Reveal className="space-y-6 text-[16px] leading-relaxed text-[#07357e]">
-            <p className="font-semibold">Aquí ocurre algo diferente.</p>
-            <div className="space-y-1">
-              <p>Aquí se mide.</p>
-              <p>Aquí se explica.</p>
-              <p>Aquí se acompaña.</p>
-            </div>
-            <p className="text-[#07357e]/80">Y así...</p>
-            <p>
-              Pacientes que llegan con frustración, salen entendiendo qué ocurre realmente en su
-              metabolismo y, gracias a ello, recuperan energía, claridad y calidad de vida.
-            </p>
-          </Reveal>
-          <Reveal className="overflow-hidden rounded-[6px]">
-            <img
-              src={asset("metodo-metabolico-ivan-ibanez-1536x962.avif")}
-              alt="Método Metabólico"
-              className="h-full w-full object-cover"
-            />
-          </Reveal>
-        </div>
+        {/* trust blocks: image + text, alternating sides */}
+        {TRUST_BLOCKS.map((block, i) => (
+          <div key={block.n} className="mt-20 grid items-center gap-10 md:grid-cols-2">
+            <Reveal
+              className={
+                i % 2 === 1
+                  ? "aspect-[4/3] overflow-hidden rounded-[6px] md:order-2"
+                  : "aspect-[4/3] overflow-hidden rounded-[6px]"
+              }
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={block.img} alt={block.title} className="h-full w-full object-cover" />
+            </Reveal>
 
-        {/* blue image + copy */}
-        <div className="mt-20 grid items-center gap-10 md:grid-cols-2">
-          <Reveal className="order-2 overflow-hidden rounded-[6px] md:order-1">
-            <img
-              src={asset("antiaging-longevidad-1-1024x683.avif")}
-              alt="Antiaging y longevidad"
-              className="h-full w-full object-cover"
-            />
-          </Reveal>
-          <Reveal className="order-1 space-y-6 text-[16px] leading-relaxed text-[#07357e] md:order-2">
-            <p>
-              Personas que conviven con obesidad, sobrepeso o lipedema durante años encuentran, por
-              fin, un enfoque que lo comprende y lo mide.
-            </p>
-            <p>
-              Quienes quieren mantener su ritmo de vida con energía estable, foco mental y un cuerpo
-              que responda, descubren cómo hacerlo.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* closing */}
-        <Reveal className="mt-20 space-y-6 text-[16px] leading-relaxed text-[#07357e]">
-          <p>Porque la medicina no es solo prescribir.</p>
-          <div className="space-y-1">
-            <p>Es escuchar.</p>
-            <p>Es interpretar.</p>
-            <p>Es personalizar.</p>
+            <Reveal
+              className={
+                i % 2 === 1
+                  ? "space-y-4 text-[16px] leading-relaxed text-[#07357e] md:order-1"
+                  : "space-y-4 text-[16px] leading-relaxed text-[#07357e]"
+              }
+              delay={120}
+            >
+              <p className="font-tight text-[15px] font-semibold tracking-wide text-[#0a6ea8]">
+                {block.n} — {block.title}
+              </p>
+              <p>{block.body}</p>
+            </Reveal>
           </div>
-          <p className="font-semibold">Profesionalidad y humanidad no deberían ser excepcionales.</p>
-          <p className="font-tight text-[clamp(1.4rem,2.5vw,2rem)] font-semibold">Aquí son la base.</p>
-        </Reveal>
+        ))}
       </div>
     </section>
   );

@@ -8,6 +8,60 @@ export function PlusIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function MailIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 7 8.5 6 8.5-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function ScanIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+      <path
+        d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"
+        strokeLinecap="round"
+      />
+      <path d="M4 12h16" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function FileTextIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" strokeLinejoin="round" />
+      <path d="M14 3v5h5M9 13h6M9 17h4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function FolderIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+      <path
+        d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function BellIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
+      <path
+        d="M6 9a6 6 0 1 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13 6 9Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M10.5 18a1.8 1.8 0 0 0 3 0" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...props}>

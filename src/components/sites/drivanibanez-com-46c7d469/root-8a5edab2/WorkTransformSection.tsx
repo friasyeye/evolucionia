@@ -52,10 +52,10 @@ export function WorkTransformSection() {
 
               <a
                 href="/cita"
-                className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#0a2a5e] bg-transparent px-5 py-2.5 text-[14px] font-medium text-[#0a2a5e] transition-colors hover:bg-[#0a2a5e]/5"
+                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-[#0a2a5e] bg-transparent px-5 py-2.5 text-[14px] font-medium text-[#0a2a5e] transition-colors hover:bg-[#0a2a5e] hover:text-white"
               >
                 Calcula tu ahorro
-                <ArrowRightIcon className="h-4 w-4 -rotate-45" />
+                <ArrowRightIcon className="h-4 w-4 -rotate-45 text-[#0a2a5e] transition-colors group-hover:text-white" />
               </a>
 
               <div className="mt-10 grid gap-x-6 gap-y-5 sm:grid-cols-3">

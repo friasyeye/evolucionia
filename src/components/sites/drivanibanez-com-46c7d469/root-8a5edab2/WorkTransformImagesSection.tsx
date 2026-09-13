@@ -49,6 +49,7 @@ export function WorkTransformImagesSection() {
                   className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/50 transition-colors duration-500 group-hover:from-black/70" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#07357e]/60 to-transparent" />
                 {/* top row */}
                 <div className="absolute inset-x-0 top-0 flex items-start justify-between p-6">
                   <PlusIcon className="h-7 w-7 text-white" />

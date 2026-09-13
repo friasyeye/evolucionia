@@ -184,6 +184,116 @@
   transform: translateY(0);
 }
 
+/* ============ Integraciones: órbita de logos ============ */
+/* Una sola duración compartida: el anillo gira y cada logo contra-rota lo
+   mismo, así los logos orbitan pero nunca quedan boca abajo. */
+/* Círculo, no elipse. Cada logo se coloca por su ÁNGULO (--t) con seno y
+   coseno, y lo que se anima es ese ángulo, no una rotación del contenedor:
+   así el logo solo se traslada, nunca se inclina, y no hace falta
+   contra-rotación. (Un scaleX entre dos rotaciones no se cancela: se
+   convierte en cizalla y deforma los logos.) */
+.evo-orb {
+  --evo-orb-dur: 70s;
+  --evo-orb-r: 460px;
+}
+
+@property --t {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Cada logo recorre el círculo; --start lo reparte por el arco. */
+.evo-orb__slot {
+  --t: 0deg;
+  transform: translate(
+    calc(sin(var(--start) + var(--t)) * var(--evo-orb-r)),
+    calc(cos(var(--start) + var(--t)) * var(--evo-orb-r) * -1)
+  );
+  animation: evo-orbit var(--evo-orb-dur) linear infinite;
+  will-change: transform;
+}
+
+/* ---- Móvil: los logos recorren el arco superior ----
+   Mismo mecanismo que en desktop (posición por ángulo), pero el ángulo va de
+   -60deg a +60deg: los logos entran por un lado y salen por el otro, y el
+   recorte del contenedor los oculta fuera de la cúspide. */
+.evo-arc {
+  --evo-arc-dur: 24s;
+  --evo-arc-r: 450px;
+  --evo-arc-n: 5;
+}
+
+@property --at {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.evo-arc__slot {
+  --at: 0deg;
+  transform: translate(
+    calc(sin(var(--at)) * var(--evo-arc-r) - 20px),
+    calc(cos(var(--at)) * var(--evo-arc-r) * -1 - 20px)
+  );
+  animation: evo-arc-run var(--evo-arc-dur) linear infinite;
+  /* cada logo arranca en un punto distinto del recorrido */
+  animation-delay: calc(var(--evo-arc-dur) / var(--evo-arc-n) * var(--i) * -1);
+  will-change: transform;
+}
+
+@keyframes evo-arc-run {
+  from {
+    --at: -60deg;
+  }
+  to {
+    --at: 60deg;
+  }
+}
+
+/* Nivel 4: flotación suave desfasada por logo */
+.evo-orb__chip {
+  animation: evo-float 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Chips: la columna entera se desliza hacia arriba un chip cada vez.
+   El que llega al frente se resalta; el resto quedan atenuados. */
+.evo-chips__track {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Al volver al principio se reposiciona sin animar, para que no se vea
+   el salto hacia atrás. */
+.evo-chips__track[data-jump="true"] {
+  transition: none;
+}
+.evo-chip {
+  opacity: 0.45;
+  transition: opacity 0.6s ease;
+}
+.evo-chip[data-active="true"] {
+  opacity: 1;
+}
+
+/* Anima el ángulo, no una rotación: el logo recorre la elipse sin girar. */
+@keyframes evo-orbit {
+  from {
+    --t: 0deg;
+  }
+  to {
+    --t: 360deg;
+  }
+}
+@keyframes evo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .di-marquee {
     animation: none;
@@ -192,6 +302,18 @@
     opacity: 1;
     filter: none;
     transform: none;
+    transition: none;
+  }
+  .evo-orb__slot,
+  .evo-orb__chip,
+  .evo-arc__slot {
+    animation: none;
+  }
+  /* sin animación los logos quedarían apilados en el centro: los repartimos */
+  .evo-arc__slot {
+    --at: calc(-38deg / 2 + 38deg / (var(--evo-arc-n) - 1) * var(--i));
+  }
+  .evo-chip {
     transition: none;
   }
 }

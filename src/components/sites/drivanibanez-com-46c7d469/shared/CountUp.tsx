@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 
 /** Counts up to `end` when scrolled into view. */
-export function CountUp({ end, duration = 1600 }: { end: number; duration?: number }) {
+export function CountUp({
+  end,
+  duration = 1600,
+  suffix = "",
+}: {
+  end: number;
+  duration?: number;
+  suffix?: string;
+}) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [value, setValue] = useState(0);
   const started = useRef(false);
@@ -33,5 +41,10 @@ export function CountUp({ end, duration = 1600 }: { end: number; duration?: numb
     return () => obs.disconnect();
   }, [end, duration]);
 
-  return <span ref={ref}>{value}</span>;
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
 }

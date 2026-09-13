@@ -62,7 +62,7 @@ export function SiteHeader() {
 
         <a
           href={CITA_HREF}
-          className="hidden items-center rounded-full bg-[#56c5f2] px-5 py-2 text-[15px] text-white transition-colors hover:bg-[#56c5f2]/85 lg:flex"
+          className="hidden items-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2 text-[15px] text-white transition-colors hover:bg-transparent hover:text-[#56c5f2] lg:flex"
         >
           Diagnóstico gratuito
         </a>
@@ -107,7 +107,7 @@ export function SiteHeader() {
           <a
             href={CITA_HREF}
             onClick={() => setOpen(false)}
-            className="mt-3 inline-flex items-center justify-center rounded-full bg-[#56c5f2] px-5 py-2.5 text-[16px] text-white"
+            className="mt-3 inline-flex items-center justify-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2.5 text-[16px] text-white transition-colors hover:bg-transparent hover:text-[#56c5f2]"
           >
             Diagnóstico gratuito
           </a>

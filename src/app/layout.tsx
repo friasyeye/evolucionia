@@ -17,7 +17,7 @@ const interTight = Inter_Tight({
 export const metadata: Metadata = {
   title: "Agencia de Inteligencia Artificial para empresas | Evolución IA",
   description:
-    "Agencia de IA para empresas. Automatización de procesos, chatbots y agentes de IA a medida, integrados en tu negocio. Solicita tu auditoría gratuita.",
+    "Desarrollamos automatizaciones de procesos, chatbots y agentes de IA a medida para que tu negocio escale y se posicione por delante de su competencia. ¡Pide tu Auditoría!",
   icons: {
     icon: "/seo/favicon.png",
     apple: "/seo/favicon.png",

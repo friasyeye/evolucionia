@@ -6,7 +6,9 @@ import { MedicinaRealSection } from "@/components/sites/drivanibanez-com-46c7d46
 import { BioSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/BioSection";
 import { MetodoSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/MetodoSection";
 import { EspecialidadesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/EspecialidadesSection";
-import { CentrosSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/CentrosSection";
+import { IntegracionesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/IntegracionesSection";
+import { FaqSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/FaqSection";
+import { ClosingCtaSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/ClosingCtaSection";
 import { SiteFooter } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/SiteFooter";
 
 export default function Home() {
@@ -20,8 +22,10 @@ export default function Home() {
         <EspecialidadesSection />
         <MedicinaRealSection />
         <BioSection />
+        <IntegracionesSection />
         <MetodoSection />
-        <CentrosSection />
+        <FaqSection />
+        <ClosingCtaSection />
       </main>
       <SiteFooter />
     </>
