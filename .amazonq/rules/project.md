@@ -11,6 +11,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+> ⚠️ **La web está bloqueada para buscadores (noindex) a propósito.** Es temporal,
+> para poder enseñarla a clientes sin que Google la indexe incompleta.
+> **Antes del lanzamiento definitivo hay que revertirlo:** ver
+> [`docs/NOINDEX-PENDIENTE.md`](docs/NOINDEX-PENDIENTE.md).
+
 # Website Reverse-Engineer Template
 
 ## What This Is
