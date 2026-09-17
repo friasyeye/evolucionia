@@ -48,7 +48,24 @@ next-env.d.ts
 # Local temp files
 temp/
 
+# Informes de Lighthouse (se regeneran; no son parte del proyecto)
+*_localhost_*.json
+
 # Source-site clone research (working material, not part of the delivered site)
 docs/research/*/
 public/sites/
 scripts/download-assets-*.mjs
+
+# Leftover pages from the cloned template, not part of Evolución IA.
+# Kept locally for reference only — must 404 in production (not deployed,
+# not in the sitemap). Do not remove these lines without checking with the
+# user first: they're intentionally excluded from every deploy.
+src/app/cita/
+src/app/sobrepeso/
+src/app/longevidad/
+src/app/profesionales/
+src/app/formacion/
+src/components/sites/drivanibanez-com-46c7d469/sobrepeso-45998576/
+src/components/sites/drivanibanez-com-46c7d469/longevidad-4c1057b2/
+src/components/sites/drivanibanez-com-46c7d469/profesionales-faa07b7e/
+src/components/sites/drivanibanez-com-46c7d469/formacion-421230b9/
