@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowRightIcon, StarIcon } from "../shared/icons";
 
 const MODALIDADES = [
@@ -51,9 +52,11 @@ export function CitaSection() {
           </h2>
 
           <div>
-            <img
+            <Image
               src="/images/logos/Sergi_safo.png"
               alt="Sergi Safo"
+              width={48}
+              height={48}
               className="mb-4 h-12 w-12 rounded-full object-cover"
             />
             <p className="text-[17px] font-normal text-[#56c5f2]">¿Prefieres hablar directamente?</p>

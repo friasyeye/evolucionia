@@ -88,7 +88,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     alt={`Logo de ${data.imageAlt}`}
                     width={300}
                     height={64}
-                    unoptimized
+                    unoptimized={data.logoSrc.endsWith(".webp")}
                     className={data.logoWidthClass ?? "w-[60%] max-w-[300px]"}
                   />
                 </div>

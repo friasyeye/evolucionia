@@ -63,7 +63,10 @@ function LogoRow() {
           alt={logo.alt}
           width={logo.width}
           height={logo.height}
-          unoptimized
+          // Los WebP ya vienen exportados a su tamaño de render (2-11KB) y
+          // recomprimirlos solo añade artefactos; los PNG llegan a resolución
+          // completa (uno es 2250x2250 para pintarse a 64px) y sí compensa.
+          unoptimized={logo.src.endsWith(".webp")}
           className={`w-auto shrink-0 opacity-70 grayscale [filter:brightness(0)_saturate(100%)_invert(16%)_sepia(63%)_saturate(2878%)_hue-rotate(206deg)_brightness(94%)_contrast(97%)] ${logo.heightClass}`}
         />
       ))}
