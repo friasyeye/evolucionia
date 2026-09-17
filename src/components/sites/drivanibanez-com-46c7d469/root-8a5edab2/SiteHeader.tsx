@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -44,19 +45,19 @@ export function SiteHeader() {
       style={transparent ? undefined : { backgroundColor: "rgba(20,20,20,0.89)" }}
     >
       <div className="mx-auto flex h-[60px] w-full items-center justify-between px-5 md:px-8">
-        <a href="/" className="font-tight text-[20px] font-semibold tracking-tight text-white">
+        <Link href="/" className="font-tight text-[20px] font-semibold tracking-tight text-white">
           Evolucion IA
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
               className="text-[15px] text-white/90 transition-colors hover:text-white"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -97,14 +98,14 @@ export function SiteHeader() {
           style={{ backgroundColor: "rgba(20,20,20,0.96)" }}
         >
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
               className="border-b border-white/10 py-3 text-[16px] text-white/90"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <a
             href={CITA_HREF}
