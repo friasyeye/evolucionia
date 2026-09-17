@@ -9,7 +9,7 @@ const NAV = [
   { label: "Contacto", href: "/contacto" },
 ];
 
-const CITA_HREF = "/cita";
+const CITA_HREF = "https://calendar.app.google/cde2o1czTcgHYRyz5";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -44,7 +44,7 @@ export function SiteHeader() {
       style={transparent ? undefined : { backgroundColor: "rgba(20,20,20,0.89)" }}
     >
       <div className="mx-auto flex h-[60px] w-full items-center justify-between px-5 md:px-8">
-        <a href="#top" className="font-tight text-[20px] font-semibold tracking-tight text-white">
+        <a href="/" className="font-tight text-[20px] font-semibold tracking-tight text-white">
           Evolucion IA
         </a>
 
@@ -62,7 +62,9 @@ export function SiteHeader() {
 
         <a
           href={CITA_HREF}
-          className="hidden items-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2 text-[15px] text-white transition-colors hover:bg-transparent hover:text-[#56c5f2] lg:flex"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden items-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2 text-[15px] text-white transition-colors hover:border-[#1e8dc4] hover:bg-[#1e8dc4] lg:flex"
         >
           Diagnóstico gratuito
         </a>
@@ -106,8 +108,10 @@ export function SiteHeader() {
           ))}
           <a
             href={CITA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="mt-3 inline-flex items-center justify-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2.5 text-[16px] text-white transition-colors hover:bg-transparent hover:text-[#56c5f2]"
+            className="mt-3 inline-flex items-center justify-center rounded-full border border-[#56c5f2] bg-[#56c5f2] px-5 py-2.5 text-[16px] text-white transition-colors hover:border-[#1e8dc4] hover:bg-[#1e8dc4]"
           >
             Diagnóstico gratuito
           </a>

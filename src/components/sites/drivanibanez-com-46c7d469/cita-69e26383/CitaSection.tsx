@@ -3,17 +3,23 @@
 import { useState } from "react";
 import { ArrowRightIcon, StarIcon } from "../shared/icons";
 
-const IMG = "/sites/drivanibanez-com-46c7d469/cita-69e26383/images";
-
 const MODALIDADES = [
-  "Videollamada · 150€",
-  "Presencial Dolor/Sobrepeso/Lipedema Girona - 80€",
-  "Presencial Longevidad en Girona · 200€ (1h de visita)",
-  "Presencial en Andorra",
+  "1.000-3.000€",
+  "3.000-6.000€",
+  "Más de 6.000€",
+  "Prefiero hablarlo en la llamada",
 ];
+
+// Formatea el teléfono como "+34 XXX XX XX XX" a medida que se escribe.
+function formatPhone(raw: string) {
+  const digits = raw.replace(/\D/g, "").replace(/^34/, "").slice(0, 9);
+  const groups = [digits.slice(0, 3), digits.slice(3, 5), digits.slice(5, 7), digits.slice(7, 9)].filter(Boolean);
+  return `+34 ${groups.join(" ")}`.trimEnd();
+}
 
 export function CitaSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [phone, setPhone] = useState("+34 ");
 
   return (
     <section
@@ -23,10 +29,10 @@ export function CitaSection() {
       {/* header text */}
       <div className="mx-auto max-w-[1000px] text-center">
         <h1 className="font-tight text-[clamp(2rem,3.4vw,2.7rem)] font-normal text-white">
-          Solicita tu <span className="font-bold">consulta</span>
+          Cuéntanos tu <span className="font-bold">caso</span>
         </h1>
         <p className="mx-auto mt-3 max-w-[46ch] text-[17px] text-white/90">
-          Recibirás una llamada para confirmar la cita en 24/48 horas
+          Te respondemos en menos de 24 horas
         </p>
       </div>
 
@@ -41,22 +47,26 @@ export function CitaSection() {
           style={{ background: "linear-gradient(33deg, #07357e, #051d42)" }}
         >
           <h2 className="font-tight text-[clamp(1.6rem,2.2vw,1.9rem)] font-normal text-white">
-            Online / Presencial
+            20-30 min · Por videollamada
           </h2>
 
           <div>
             <img
-              src={`${IMG}/dr-ivan-ibanez-perfil.webp`}
-              alt="Dr. Iván Ibáñez"
+              src="/images/logos/Sergi_safo.png"
+              alt="Sergi Safo"
               className="mb-4 h-12 w-12 rounded-full object-cover"
             />
-            <p className="text-[17px] font-normal text-[#56c5f2]">¿ERES PROFESIONAL?</p>
-            <p className="mt-1 text-[17px] text-white">Accede a la formación online.</p>
+            <p className="text-[17px] font-normal text-[#56c5f2]">¿Prefieres hablar directamente?</p>
+            <p className="mt-1 text-[17px] text-white">
+              Agenda una llamada y hablamos hoy mismo, sin esperar a que te contestemos por email.
+            </p>
             <a
-              href="/#metodo"
+              href="https://calendar.app.google/cde2o1czTcgHYRyz5"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-2 text-[15px] text-white underline underline-offset-4 transition-colors hover:text-[#56c5f2]"
             >
-              Acceder ahora
+              Agendar llamada
               <ArrowRightIcon className="h-4 w-4" />
             </a>
           </div>
@@ -83,9 +93,23 @@ export function CitaSection() {
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <input
+            type="text"
+            required
+            placeholder="¿A qué se dedica tu negocio?"
+            className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
+          />
+          <input
+            type="text"
+            required
+            placeholder="¿Qué te gustaría automatizar?"
+            className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
+          />
+          <input
             type="tel"
             required
-            placeholder="Teléfono"
+            value={phone}
+            onChange={(e) => setPhone(formatPhone(e.target.value))}
+            placeholder="+34 600 00 00 00"
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <select
@@ -94,7 +118,7 @@ export function CitaSection() {
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] focus:outline-none"
           >
             <option value="" disabled>
-              Modalidad de visita
+              Inversión
             </option>
             {MODALIDADES.map((m) => (
               <option key={m} value={m}>
@@ -117,7 +141,7 @@ export function CitaSection() {
         </form>
       </div>
 
-      {/* rating + topdoctors */}
+      {/* rating */}
       <div className="mx-auto mt-10 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2">
           <span className="text-[17px] font-semibold text-[#07357e]">4.9</span>
@@ -128,9 +152,8 @@ export function CitaSection() {
           </div>
         </div>
         <p className="text-[15px] text-[#07357e]">
-          Basado en <span className="font-semibold">25 reseñas</span>
+          Basado en <span className="font-semibold">23 reseñas</span>
         </p>
-        <img src={`${IMG}/topdoctors-logo.svg`} alt="Top Doctors" className="mt-2 h-5 w-auto" />
       </div>
     </section>
   );

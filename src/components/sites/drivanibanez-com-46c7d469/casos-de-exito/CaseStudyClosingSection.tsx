@@ -1,9 +1,10 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "../shared/Reveal";
 
-export function ClosingCtaSection() {
+export function CaseStudyClosingSection({ pitch }: { pitch: ReactNode }) {
   const ref = useRef<HTMLElement | null>(null);
   // Progreso del gradiente: empieza casi todo azul y se aclara según se
   // hace scroll por la sección, hasta llegar al mismo aspecto de siempre.
@@ -53,18 +54,20 @@ export function ClosingCtaSection() {
       <div className="mx-auto w-full max-w-[1200px]">
         <Reveal
           as="h2"
-          className="font-tight max-w-[24ch] text-[clamp(1.8rem,3.4vw,2.8rem)] font-semibold leading-[1.15] text-white"
+          className="font-tight max-w-[40ch] text-[clamp(1.8rem,3.4vw,2.8rem)] font-semibold leading-[1.15] text-white"
         >
-          Nada de esto cambia si sigue siendo una idea aparcada. Por nuestra parte, estamos
-          preparados y con ganas de escuchar tu proyecto.
+          {pitch}
         </Reveal>
       </div>
 
       <div className="mx-auto w-full max-w-[1200px]">
         <Reveal>
-          <span className="font-tight block text-[clamp(1.8rem,3.4vw,2.8rem)] font-semibold leading-[1.15] text-[#07357e]">
+          <a
+            href="/contacto"
+            className="font-tight block text-[clamp(1.8rem,3.4vw,2.8rem)] font-semibold leading-[1.15] text-[#07357e] transition-colors hover:text-[#0a6ea8]"
+          >
             Hablemos.
-          </span>
+          </a>
         </Reveal>
       </div>
     </section>

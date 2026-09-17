@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // Cada logo llega con su propio aspect ratio y "peso" visual natural (un
 // wordmark ancho como Renovamarin lee más grande que un emblema cuadrado
@@ -21,9 +22,7 @@ export function HeroSection() {
       id="top"
       className="relative isolate flex min-h-[100svh] w-full items-start overflow-hidden"
     >
-      {/* ---------- background photo ----------
-          hero-background-mobile.jpg es un recorte vertical generado a partir de
-          hero-background-desktop.png, centrado en la silueta. */}
+      {/* ---------- background photo ---------- */}
       {/* quality={85}: al 75% por defecto (Next.js default) se perdía el
           grano/textura de la foto original en las zonas de degradado del
           cielo — se notaba especialmente en pantallas grandes. 85 recupera
@@ -31,29 +30,19 @@ export function HeroSection() {
           de calidad 90-100 (540KB-850KB), buscando mantener el LCP bajo
           para Page Speed. */}
       <Image
-        src="/images/hero-background-mobile.jpg"
+        src="/images/posible_hero.jpeg"
         alt=""
         aria-hidden
         fill
         priority
         quality={85}
         sizes="100vw"
-        className="-z-10 object-cover md:hidden"
-      />
-      <Image
-        src="/images/hero-background-desktop.png"
-        alt=""
-        aria-hidden
-        fill
-        priority
-        quality={85}
-        sizes="100vw"
-        className="-z-10 hidden scale-[1.35] object-cover [object-position:53%_66%] md:block"
+        className="hero-bg-desktop -z-10 object-cover [object-position:62%_center]"
       />
 
       {/* content */}
       <div className="relative flex min-h-[100svh] w-full flex-col">
-        <div className="mx-auto w-full max-w-[1480px] flex-1 px-6 pt-[20svh] sm:px-8 sm:pt-[22svh] md:px-14 md:pt-[19svh] lg:px-20">
+        <div className="mx-auto w-full max-w-[1480px] flex-1 px-6 pt-[26svh] sm:px-8 sm:pt-[28svh] md:px-14 md:pt-[25svh] lg:px-20">
           {/* "Agencia IA" is the page's H1. It stays right here in DOM/reading
               order — immediately before the H2 — for semantics, accessibility
               and SEO, but is visually hidden (`sr-only`) at this spot. Its
@@ -61,22 +50,14 @@ export function HeroSection() {
               the plain <p> labelled "visual H1 echo" below, matching the
               Ringr AI reference layout without duplicating a real heading or
               disturbing heading order for assistive tech / search engines. */}
-          <div className="mx-auto flex max-w-[780px] flex-col text-center">
+          <div className="flex max-w-[920px] flex-col text-left">
             <h1 className="sr-only">Agencia de IA</h1>
-            <h2 className="font-tight text-[clamp(2rem,4.2vw,3.25rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-white">
-              Automatización e IA a medida integrada en tu negocio
+            <h2 className="font-tight text-[clamp(2.5rem,5.4vw,4.25rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-white">
+              Automatización e IA diseñada a medida para empresas
             </h2>
-            <p className="mx-auto mt-4 max-w-[52ch] text-[clamp(0.95rem,1.15vw,1.125rem)] font-light leading-relaxed text-white/85">
-              Desarrollamos automatizaciones, chatbots y agentes de IA a medida que se adaptan a cómo ya trabaja tu equipo.
+            <p className="mt-12 max-w-[52ch] text-[clamp(0.95rem,1.15vw,1.125rem)] font-light leading-relaxed text-white/85">
+              ¿Tareas repetitivas que le quitan tiempo a tu equipo? ¿Información repartida entre WhatsApp, email y carpetas sueltas? En Evolución IA creamos automatizaciones y agentes de IA a medida que te devuelven ese tiempo perdido.
             </p>
-            <div className="mt-7">
-              <a
-                href="/cita"
-                className="inline-flex items-center justify-center rounded-full bg-white/15 px-7 py-3.5 text-[0.95rem] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
-              >
-                Llamada de descubrimiento
-              </a>
-            </div>
           </div>
         </div>
 
@@ -87,19 +68,27 @@ export function HeroSection() {
             se edita a gris, así se puede reutilizar en cualquier fondo
             (ver conversación: por qué el color se aplica en CSS, no en el asset). */}
         <div className="mx-auto w-full max-w-[1480px] px-6 pb-10 sm:px-8 md:px-14 md:pb-12 lg:px-20">
+          {/* Visual stand-in for the H1 above ("Agencia IA"), aria-hidden so
+              screen readers don't hear it twice — the real, accessible H1
+              lives with the main heading block. On mobile it sits above the
+              border line, left-aligned; on desktop it moves back inside the
+              bordered row next to the logos. */}
+          <p aria-hidden className="mb-3 text-left font-tight text-[0.72rem] font-semibold tracking-[0.02em] text-white/60 md:hidden">
+            Agencia de IA
+          </p>
           <div className="flex flex-col items-center gap-5 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between md:gap-8">
-            <div className="flex flex-col items-center gap-1 text-center md:items-start md:text-left">
-              {/* Visual stand-in for the H1 above ("Agencia IA"), aria-hidden so
-                  screen readers don't hear it twice — the real, accessible H1
-                  lives with the main heading block. */}
+            <div className="hidden flex-col items-start gap-1 text-left md:flex">
               <p aria-hidden className="font-tight text-[0.72rem] font-semibold tracking-[0.02em] text-white/60">
                 Agencia de IA
               </p>
-              <p className="font-tight text-[0.8rem] font-semibold leading-snug text-cyan-accent">
+              <Link
+                href="/casos-de-exito"
+                className="font-tight text-[0.8rem] font-semibold leading-snug text-cyan-accent transition-colors hover:text-cyan-accent/80"
+              >
                 Ver casos de éxito
-              </p>
+              </Link>
             </div>
-            <div className="flex w-full flex-nowrap items-center justify-between gap-x-2 opacity-70 grayscale [filter:brightness(0)_invert(1)] sm:justify-center sm:gap-x-6 md:w-auto md:flex-wrap md:gap-x-12 md:gap-y-5">
+            <div className="order-1 flex w-full flex-nowrap items-center justify-between gap-x-2 opacity-70 grayscale [filter:brightness(0)_invert(1)] sm:justify-center sm:gap-x-6 md:order-none md:w-auto md:flex-wrap md:gap-x-12 md:gap-y-5">
               {CLIENT_LOGOS.map((logo) => (
                 // unoptimized: son PNG originales sin SVG disponible, ya
                 // exportados a WebP y a su tamaño de render real (ver
@@ -119,6 +108,12 @@ export function HeroSection() {
                 />
               ))}
             </div>
+            <Link
+              href="/casos-de-exito"
+              className="order-2 font-tight text-[0.8rem] font-semibold leading-snug text-cyan-accent transition-colors hover:text-cyan-accent/80 md:hidden"
+            >
+              Ver casos de éxito
+            </Link>
           </div>
         </div>
       </div>

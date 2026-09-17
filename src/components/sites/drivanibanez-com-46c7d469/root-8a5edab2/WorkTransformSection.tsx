@@ -51,7 +51,7 @@ export function WorkTransformSection() {
               </h3>
 
               <a
-                href="/cita"
+                href="/servicios"
                 className="group mt-7 inline-flex items-center gap-2 rounded-full border border-[#0a2a5e] bg-transparent px-5 py-2.5 text-[14px] font-medium text-[#0a2a5e] transition-colors hover:bg-[#0a2a5e] hover:text-white"
               >
                 Calcula tu ahorro

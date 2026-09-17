@@ -152,6 +152,16 @@
   background-color: #07357e;
 }
 
+/* Hero background: fluidly slides the focal point rightward on narrower
+   desktop widths (e.g. 1349px laptops) so the title doesn't cover the
+   silhouette, while staying fixed at 50% on wide monitors (tested at 1920px)
+   and fixed at 35% below the laptop breakpoint. Matches Tailwind's `md:`. */
+@media (min-width: 768px) {
+  .hero-bg-desktop {
+    object-position: clamp(35%, calc(-0.44% + 0.026268 * 100vw), 50%) center;
+  }
+}
+
 /* Hero infinite marquee */
 .di-marquee {
   display: flex;
@@ -203,13 +213,15 @@
   initial-value: 0deg;
 }
 
-/* Cada logo recorre el círculo; --start lo reparte por el arco. */
+/* Cada logo recorre el círculo; --start lo reparte por el arco.
+   El ángulo va dentro de su propio calc(): sin()/cos() esperan un <angle>, y
+   una suma suelta de dos var() no lo es, así que sin envolverla el navegador
+   descarta el transform entero y los logos se reparten mal. */
 .evo-orb__slot {
   --t: 0deg;
-  transform: translate(
-    calc(sin(var(--start) + var(--t)) * var(--evo-orb-r)),
-    calc(cos(var(--start) + var(--t)) * var(--evo-orb-r) * -1)
-  );
+  --angle: calc(var(--start) + var(--t));
+  transform: translateX(calc(sin(var(--angle)) * var(--evo-orb-r)))
+    translateY(calc(cos(var(--angle)) * var(--evo-orb-r) * -1));
   animation: evo-orbit var(--evo-orb-dur) linear infinite;
   will-change: transform;
 }
