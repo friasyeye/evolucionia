@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PlusIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -39,14 +40,17 @@ export function WorkTransformImagesSection() {
           {CARDS.map((card) => (
             <Reveal key={card.title}>
               <a
-                href="#especialidades"
+                href="/servicios"
                 className="group relative block aspect-[3/4] w-full overflow-hidden rounded-[2px]"
               >
-                <img
+                <Image
                   src={card.img}
                   alt={card.title}
+                  fill
+                  quality={85}
+                  sizes="(min-width: 768px) 380px, 100vw"
                   style={card.imgPosition ? { objectPosition: card.imgPosition } : undefined}
-                  className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/50 transition-colors duration-500 group-hover:from-black/70" />
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#07357e]/60 to-transparent" />

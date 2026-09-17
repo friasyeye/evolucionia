@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Reveal } from "../shared/Reveal";
 
 const STEPS = [
@@ -29,15 +30,21 @@ export function BioSection() {
       <div className="mx-auto grid w-full max-w-[1200px] items-stretch gap-10 md:grid-cols-[1.1fr_1fr]">
         {/* portrait */}
         <Reveal className="relative min-h-[420px] w-full overflow-hidden">
-          <img
+          <Image
             src="/images/bio-portrait-background.jfif"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover"
+            fill
+            quality={85}
+            sizes="(min-width: 768px) 630px, 100vw"
+            className="object-cover"
           />
-          <img
+          <Image
             src="/images/bio-system-diagram.png"
             alt="Diagrama del sistema"
-            className="absolute inset-0 m-auto w-[95%] max-w-[560px] object-contain"
+            fill
+            quality={85}
+            sizes="(min-width: 768px) 560px, 95vw"
+            className="m-auto object-contain"
           />
         </Reveal>
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Reveal } from "../shared/Reveal";
 import { CountUp } from "../shared/CountUp";
 
@@ -92,12 +93,18 @@ export function MetodoSection() {
             <Reveal
               className={
                 i % 2 === 1
-                  ? "aspect-[4/3] overflow-hidden rounded-[6px] md:order-2"
-                  : "aspect-[4/3] overflow-hidden rounded-[6px]"
+                  ? "relative aspect-[4/3] overflow-hidden rounded-[6px] md:order-2"
+                  : "relative aspect-[4/3] overflow-hidden rounded-[6px]"
               }
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={block.img} alt={block.title} className="h-full w-full object-cover" />
+              <Image
+                src={block.img}
+                alt={block.title}
+                fill
+                quality={85}
+                sizes="(min-width: 768px) 580px, 100vw"
+                className="object-cover"
+              />
             </Reveal>
 
             <Reveal

@@ -1,20 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  MailIcon,
-  ScanIcon,
-  FileTextIcon,
-  FolderIcon,
-  BellIcon,
-} from "../shared/icons";
+import Image from "next/image";
+import { FileTextIcon } from "../shared/icons";
 
 const CHIPS = [
-  { label: "Llega un correo", tag: "Entrada", Icon: MailIcon },
-  { label: "Se leen los datos", tag: "Lectura", Icon: ScanIcon },
-  { label: "Se genera el documento", tag: "Redacción", Icon: FileTextIcon },
-  { label: "Se guarda en Drive", tag: "Archivado", Icon: FolderIcon },
-  { label: "Aviso al responsable", tag: "Notificación", Icon: BellIcon },
+  { label: "Llega un correo", tag: "Entrada", logo: "/images/logos/mail.svg" },
+  {
+    label: "Se leen los datos",
+    tag: "Lectura",
+    logo: "/images/logos/robot.svg",
+    logoClassName: "h-5 w-5",
+  },
+  { label: "Se genera el documento", tag: "Redacción", Icon: FileTextIcon, iconClassName: "h-6 w-6" },
+  {
+    label: "Se guarda en Drive",
+    tag: "Archivado",
+    logo: "/images/logos/logo_microsoftwebp.webp",
+    logoClassName: "h-4 w-4",
+  },
+  { label: "Aviso al responsable", tag: "Notificación", logo: "/images/logos/slack.png" },
 ];
 
 const ROTATE_MS = 1800;
@@ -62,7 +67,7 @@ export function IntegrationChips() {
         data-jump={jump ? "true" : undefined}
         style={{ transform: `translateY(-${pos * STEP_PX}px)` }}
       >
-        {LOOP.map(({ label, tag, Icon }, i) => (
+        {LOOP.map(({ label, tag, Icon, logo, logoClassName, iconClassName }, i) => (
           <li
             key={`${tag}-${i}`}
             aria-hidden={i >= CHIPS.length ? true : undefined}
@@ -75,9 +80,20 @@ export function IntegrationChips() {
           >
             <span
               aria-hidden="true"
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[7px] bg-[#07357e]/12"
+              className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-[7px] bg-[#07357e]/12"
             >
-              <Icon className="h-4 w-4 text-[#07357e]" />
+              {logo ? (
+                <Image
+                  src={logo}
+                  alt=""
+                  width={28}
+                  height={28}
+                  unoptimized={logo.endsWith(".svg")}
+                  className={`object-contain ${logoClassName ?? "h-full w-full"}`}
+                />
+              ) : Icon ? (
+                <Icon className={`text-[#07357e] ${iconClassName ?? "h-5 w-5"}`} />
+              ) : null}
             </span>
             <span className="text-[14px] leading-tight text-[#07357e]">{label}</span>
             <span className="ml-auto shrink-0 text-[12px] text-[#07357e]/50">{tag}</span>

@@ -1,29 +1,23 @@
+import Image from "next/image";
 import { Reveal } from "../shared/Reveal";
 import { IntegrationChips } from "./IntegrationChips";
 
-/**
- * Logos de la órbita. Placeholder temporal: cuando lleguen los reales,
- * sustituir `src: null` por la ruta en /images/logos y ajustar `alt`.
- */
-const LOGOS: { alt: string; src: string | null }[] = [
+const LOGOS: { alt: string; src: string; fill?: boolean; scale?: number; bg?: string }[] = [
   { alt: "Logotipo de Dropbox", src: "/images/logos/Dropbox_logo.webp" },
   { alt: "Logotipo de Microsoft", src: "/images/logos/logo_microsoftwebp.webp" },
-  { alt: "Logotipo de Pipedrive", src: "/images/logos/pipedrive.jpg" },
-  { alt: "Logotipo de WhatsApp", src: "/images/logos/whatsapp.webp" },
-  { alt: "Logotipo de HubSpot", src: "/images/logos/hubspot.png" },
-  { alt: "Logotipo de Google Drive", src: null },
-  { alt: "Logotipo de Google Calendar", src: null },
-  { alt: "Logotipo de Notion", src: null },
-  { alt: "Logotipo de Excel", src: null },
-  { alt: "Logotipo de Zapier", src: null },
+  { alt: "Logotipo de Pipedrive", src: "/images/logos/pipedrive.png", bg: "#000000" },
+  {
+    alt: "Logotipo de WhatsApp",
+    src: "/images/logos/whatsapp-icon-white.png",
+    bg: "#25D366",
+  },
+  { alt: "Logotipo de HubSpot", src: "/images/logos/hubspot.png", fill: true },
+  { alt: "Logotipo de BIM", src: "/images/logos/bim.jfif", fill: true },
+  { alt: "Logotipo de Google Calendar", src: "/images/logos/Google_Calendar_icon_(2020).svg.webp" },
+  { alt: "Logotipo de Procore", src: "/images/logos/procore.png" },
+  { alt: "Logotipo de Excel", src: "/images/logos/Microsoft_Office_Excel_(2019–2025).svg.webp" },
+  { alt: "Logotipo de Monday", src: "/images/logos/monday-icon.svg" },
 ];
-
-/** Reparto angular de los logos sobre la elipse (radios en globals.css). */
-const STEP = 360 / LOGOS.length;
-
-/** En móvil solo caben unos pocos logos sobre el arco.
- *  Si cambia la cantidad, actualizar --evo-arc-n en globals.css. */
-const MOBILE_ARC = LOGOS.slice(0, 5);
 
 /** Círculo de la órbita: radio 460 (debe coincidir con --evo-orb-r). */
 const ORB_R = 460;
@@ -33,13 +27,42 @@ const ORB_PAD_TOP = 30;
  *  Da 674px: si cambia, actualizar el `md:min-h-[674px]` del bloque de texto. */
 const ORB_VISIBLE_H = Math.round(ORB_R * 2 * 0.7) + ORB_PAD_TOP;
 
-function LogoMark({ alt, src }: { alt: string; src: string | null }) {
-  if (src) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} className="h-7 w-7 object-contain" />;
-  }
+/** Los logos giran por todo el círculo, pero solo se ve el arco de arriba: con
+ *  los diez a la vez quedaban amontonados, así que orbitan siete (51º entre
+ *  cada uno) y el resto se quedan para los chips de la card. */
+const ORB_LOGOS = LOGOS.slice(0, 7);
+
+/** Reparto angular de los logos sobre la elipse (radios en globals.css). */
+const STEP = 360 / ORB_LOGOS.length;
+
+/** En móvil solo caben unos pocos logos sobre el arco.
+ *  Si cambia la cantidad, actualizar --evo-arc-n en globals.css. */
+const MOBILE_ARC = LOGOS.slice(0, 5);
+
+function LogoMark({
+  alt,
+  src,
+  fill,
+  scale,
+}: {
+  alt: string;
+  src: string;
+  fill?: boolean;
+  scale?: number;
+}) {
+  // Los chips miden como mucho 48px: pedimos esa resolución y Next sirve el
+  // WebP/AVIF redimensionado en vez del original (algunos pesaban 150KB a
+  // 554px para pintarse a 28px). Los SVG no pasan por el optimizador.
   return (
-    <span role="img" aria-label={alt} className="block h-6 w-6 rounded-full bg-[#07357e]/12" />
+    <Image
+      src={src}
+      alt={alt}
+      width={48}
+      height={48}
+      unoptimized={src.endsWith(".svg")}
+      className={fill ? "h-full w-full object-cover" : "h-7 w-7 object-contain"}
+      style={fill && scale ? { transform: `scale(${scale})` } : undefined}
+    />
   );
 }
 
@@ -48,7 +71,7 @@ export function IntegracionesSection() {
     <section
       aria-labelledby="integraciones-title"
       className="w-full overflow-hidden px-5 py-24 md:px-8"
-      style={{ background: "linear-gradient(180deg, #d6edfb 0%, #eaf6fd 65%, #ffffff 100%)" }}
+      style={{ background: "linear-gradient(180deg, #07357e 0%, #f5f5f5 100%)" }}
     >
       <div className="mx-auto w-full max-w-[1200px]">
         {/* ---------- Órbita con el texto dentro + card ----------
@@ -65,11 +88,11 @@ export function IntegracionesSection() {
             <div className="absolute left-1/2" style={{ top: `${ORB_R + ORB_PAD_TOP}px` }}>
               {/* anillo tenue */}
               <div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#07357e]/10"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/25"
                 style={{ height: `${ORB_R * 2}px`, width: `${ORB_R * 2}px` }}
               />
 
-              {LOGOS.map((logo, i) => (
+              {ORB_LOGOS.map((logo, i) => (
                 // recorre el círculo variando su ángulo; nunca rota
                 <div
                   key={logo.alt}
@@ -78,10 +101,15 @@ export function IntegracionesSection() {
                 >
                   {/* flotación desfasada */}
                   <div
-                    className="evo-orb__chip flex h-12 w-12 items-center justify-center rounded-full border border-[#07357e]/12 bg-white"
-                    style={{ "--delay": `${i * 0.6}s` } as React.CSSProperties}
+                    className="evo-orb__chip flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-[#07357e]/12 bg-white"
+                    style={
+                      {
+                        "--delay": `${i * 0.6}s`,
+                        ...(logo.bg ? { backgroundColor: logo.bg } : null),
+                      } as React.CSSProperties
+                    }
                   >
-                    <LogoMark alt={logo.alt} src={logo.src} />
+                    <LogoMark alt={logo.alt} src={logo.src} fill={logo.fill} scale={logo.scale} />
                   </div>
                 </div>
               ))}
@@ -101,14 +129,17 @@ export function IntegracionesSection() {
             <div className="absolute left-1/2 top-[60px] h-[900px] w-[900px] -translate-x-1/2 rounded-full border border-[#07357e]/15" />
 
             {/* logos deslizándose a lo largo de la curva */}
-            {MOBILE_ARC.map(({ alt, src }, i) => (
+            {MOBILE_ARC.map(({ alt, src, fill, scale, bg }, i) => (
               <div
                 key={alt}
                 className="evo-arc__slot absolute left-1/2 top-[510px]"
                 style={{ "--i": i } as React.CSSProperties}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#07357e]/12 bg-white">
-                  <LogoMark alt={alt} src={src} />
+                <div
+                  className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[#07357e]/12 bg-white"
+                  style={bg ? { backgroundColor: bg } : undefined}
+                >
+                  <LogoMark alt={alt} src={src} fill={fill} scale={scale} />
                 </div>
               </div>
             ))}
@@ -119,12 +150,12 @@ export function IntegracionesSection() {
           <Reveal className="relative mx-auto flex max-w-[560px] flex-col items-center pt-[170px] text-center md:min-h-[674px] md:justify-end md:pb-[200px] md:pt-0">
             <h2
               id="integraciones-title"
-              className="font-tight max-w-[26ch] text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold leading-[1.05] text-[#07357e]"
+              className="font-tight max-w-[26ch] text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold leading-[1.05] text-white"
             >
               Integramos IA con las herramientas que ya usas
             </h2>
 
-            <p className="mt-5 text-[16px] leading-relaxed text-[#07357e]/80">
+            <p className="mt-5 text-[16px] leading-relaxed text-white/80">
               Nos conectamos a lo que ya usáis: correo, documentos, Whatsapp, CRM. Funciona con
               casi cualquier herramienta que tenga un acceso web detrás, así que nadie tiene que
               migrar nada ni aprender nada nuevo.
