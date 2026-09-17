@@ -23,6 +23,21 @@ export const metadata: Metadata = {
     icon: "/seo/favicon.png",
     apple: "/seo/favicon.png",
   },
+  // TEMPORAL: web en construcción, no debe indexarse todavía.
+  // Ver docs/NOINDEX-PENDIENTE.md antes del lanzamiento definitivo.
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      "max-snippet": -1,
+      "max-image-preview": "none",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
