@@ -174,7 +174,7 @@ export function CitaSection() {
               ? "¡Enviado!"
               : status === "sending"
                 ? "Enviando..."
-                : "Pedir cita"}
+                : "Enviar"}
           </button>
 
           {status === "error" && (
