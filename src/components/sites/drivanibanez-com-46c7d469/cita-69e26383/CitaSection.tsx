@@ -11,6 +11,8 @@ const MODALIDADES = [
   "Prefiero hablarlo en la llamada",
 ];
 
+const WEB3FORMS_ACCESS_KEY = "2ac4820d-26b2-433c-89de-a3d5f30413fc";
+
 // Formatea el teléfono como "+34 XXX XX XX XX" a medida que se escribe.
 function formatPhone(raw: string) {
   const digits = raw.replace(/\D/g, "").replace(/^34/, "").slice(0, 9);
@@ -19,8 +21,36 @@ function formatPhone(raw: string) {
 }
 
 export function CitaSection() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [phone, setPhone] = useState("+34 ");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("subject", "Nueva solicitud de cita — Evolución IA");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("sent");
+        form.reset();
+        setPhone("+34 ");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section
@@ -76,39 +106,38 @@ export function CitaSection() {
         </div>
 
         {/* form */}
-        <form
-          className="flex flex-col gap-6 px-2 py-4 md:px-6 md:py-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSubmitted(true);
-          }}
-        >
+        <form className="flex flex-col gap-6 px-2 py-4 md:px-6 md:py-6" onSubmit={handleSubmit}>
           <input
             type="text"
+            name="name"
             required
             placeholder="Nombre"
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <input
             type="email"
+            name="email"
             required
             placeholder="Email"
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <input
             type="text"
+            name="negocio"
             required
             placeholder="¿A qué se dedica tu negocio?"
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <input
             type="text"
+            name="automatizar"
             required
             placeholder="¿Qué te gustaría automatizar?"
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <input
             type="tel"
+            name="telefono"
             required
             value={phone}
             onChange={(e) => setPhone(formatPhone(e.target.value))}
@@ -116,6 +145,7 @@ export function CitaSection() {
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] placeholder:text-[#07357e]/70 focus:outline-none"
           />
           <select
+            name="inversion"
             required
             defaultValue=""
             className="border-b border-[#07357e] bg-transparent px-2 py-2 text-[14px] text-[#07357e] focus:outline-none"
@@ -137,10 +167,21 @@ export function CitaSection() {
 
           <button
             type="submit"
-            className="mt-2 self-start bg-[#07357e] px-6 py-3 text-[12px] font-medium uppercase tracking-[0.5px] text-[#f5f5f5] transition-colors hover:bg-[#052a66]"
+            disabled={status === "sending"}
+            className="mt-2 self-start bg-[#07357e] px-6 py-3 text-[12px] font-medium uppercase tracking-[0.5px] text-[#f5f5f5] transition-colors hover:bg-[#052a66] disabled:opacity-60"
           >
-            {submitted ? "¡Enviado!" : "Pedir cita"}
+            {status === "sent"
+              ? "¡Enviado!"
+              : status === "sending"
+                ? "Enviando..."
+                : "Pedir cita"}
           </button>
+
+          {status === "error" && (
+            <p className="text-[13px] text-red-600">
+              No se ha podido enviar. Prueba de nuevo o escríbenos directamente.
+            </p>
+          )}
         </form>
       </div>
 
