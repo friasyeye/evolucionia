@@ -7,7 +7,8 @@ import { BioSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a
 import { MetodoSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/MetodoSection";
 import { EspecialidadesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/EspecialidadesSection";
 import { IntegracionesSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/IntegracionesSection";
-import { LeadMagnetSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/LeadMagnetSection";
+// LeadMagnetSection: retirada de la home a propósito (ver AGENTS.md / pedir
+// contexto antes de reactivar). El componente se queda en el repo sin usar.
 import { FaqSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/FaqSection";
 import { ClosingCtaSection } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/ClosingCtaSection";
 import { SiteFooter } from "@/components/sites/drivanibanez-com-46c7d469/root-8a5edab2/SiteFooter";
@@ -25,7 +26,6 @@ export default function Home() {
         <BioSection />
         <IntegracionesSection />
         <MetodoSection />
-        <LeadMagnetSection />
         <FaqSection />
         <ClosingCtaSection />
       </main>
